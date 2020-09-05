@@ -1,0 +1,86 @@
+﻿@model PagingApp.Models.IndexViewModel
+
+
+@{
+    ViewBag.Title = "Home Page";
+    string[] strVar = { "Model", "Producer" };
+    string[] valPhone = { "HTC", "Samsung" };
+    string[] name = { "Производитель", "Модель" };
+
+    if (ViewData["Model"] != null)
+    {
+        valPhone[0] = (string)ViewData["Model"];
+    }
+
+    if (ViewData["Producer"] != null)
+    {
+        valPhone[1] = (string)ViewData["Producer"];
+    }
+
+
+
+
+}
+
+<table class="table">
+
+    <tr>
+        <td>Модель</td>
+        <td>Производитель</td>
+    </tr>
+
+    @foreach (var item in Model.Phones)
+    {
+        <tr>
+
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Model)</td>
+            <td>@Html.DisplayFor(modelItem => item.Producer)</td>
+
+        </tr>
+    }
+
+</table>
+<br />
+
+<div class="btn-group">
+    @*  <a class="btn btn-default" href="/?page=1">1</a><a class="btn btn-default btn-primary selected" href="/?page=2">2</a><a class="btn btn-default" href="/?page=3">3</a><a class="btn btn-default " href="/?page=4">4</a>*@
+
+    @Html.PageCount(Model.PageInfo)
+
+
+
+
+</div>
+<br />
+<div class="btn-group">
+    @*  <a class="btn btn-default" href="/?page=1">1</a><a class="btn btn-default btn-primary selected" href="/?page=2">2</a><a class="btn btn-default" href="/?page=3">3</a><a class="btn btn-default " href="/?page=4">4</a>*@
+
+    @Html.PageLinks(Model.PageInfo)  @*, x => Url.Action("Index", new { page = x }*@
+
+
+
+</div>
+
+<div>
+
+
+    <form method="get" action=CheckingForm()>
+
+
+
+        <button type="button" onclick="CheckingForm">Кликни меня</button>
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+
+        <input type="text" value="" name="Lena" autocomplete="on | off" />
+
+    </form>
+
+
+
+
+    @*@Html.InputDbData(strVar, Model.PageInfo, valPhone,name)
+        @Html.DeleteDbData(Model.PageInfo)
+        @Html.EditDbData(Model.PageInfo)*@
+
+</div>
